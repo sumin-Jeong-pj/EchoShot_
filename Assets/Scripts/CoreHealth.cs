@@ -9,12 +9,13 @@ public class CoreHealth : MonoBehaviour
     void Awake()
     {
         currentHearts = maxHearts;
+        Debug.Log($"[CoreHealth] 초기화: {currentHearts}/{maxHearts}");
     }
 
-    public void TakeHit()
+    public void TakeHit(int amount = 1)
     {
-        currentHearts = Mathf.Max(0, currentHearts - 1);
-        Debug.Log($"Core Hearts: {currentHearts}/{maxHearts}");
+        currentHearts = Mathf.Max(0, currentHearts - amount);
+        Debug.Log($"[CoreHealth] 피격! 현재 하트: {currentHearts}/{maxHearts}");
 
         if (currentHearts <= 0)
         {
@@ -24,7 +25,7 @@ public class CoreHealth : MonoBehaviour
 
     void OnDead()
     {
-        Debug.Log("Core 체력 0! Game Over 처리");
-        // TODO: 게임 오버 UI, 재시작 등
+        Debug.Log("[CoreHealth] 체력 0! Game Over 처리 필요");
+        // TODO: 게임 오버 UI or 씬 전환
     }
 }
