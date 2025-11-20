@@ -1,0 +1,14 @@
+{
+    "_comment": "bar: 마디 (0부터 시작), beat: 박자 , type: 노트 종류(0: Tap, 1: HoldStart, 2: HoldEnd, 3: Heal, 4: Bomb), angleDeg: -1이면 랜덤각, holdBeats: 홀드타입일 때 홀드 길이",
+    "songId": "echoshot_1",
+    "title": "echoshot_1",
+    "audioClipName": "echoshot_1",
+    "bpm": 120.0,
+    "beatsPerBar": 4,
+    "offsetSeconds": 0.0,
+    "noteSpeed": 3.0,
+    "notes": [
+
+
+    ] 
+}
