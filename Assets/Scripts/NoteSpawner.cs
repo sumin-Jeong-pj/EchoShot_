@@ -10,6 +10,20 @@ public class NoteSpawner : MonoBehaviour
     public Transform core;            // 중심 Core (없으면 태그로 자동 찾기)
     public SphereCollider judgeRing;     // JudgeRing (Perfect 기준선)
 
+    [Header("자동 각도(시계방향 회전)")]
+    public bool useAutoClockwiseAngle = true; // true면 자동 회전 사용
+    public float startAngle = 0f;             // 첫 노트 각도
+    public float angleStep = 90f;             // 한 번에 얼마나 돌릴지(4방향이면 90)
+    private float _currentAngle;              // 내부에서 돌려가며 쓰는 각도
+
+    [Header("마디 단위 방향 회전")]
+    public bool useBarBasedDirection = true; // true면 '마디마다' 방향 변경
+    public float barStartAngle = 0f;         // 첫 마디 방향 (0 = 오른쪽)
+    public float barAngleStep = 45f;         // 마디가 바뀔 때마다 얼마나 돌릴지 (8방향 = 45도, 4방향 = 90도)
+
+    private int _currentBar = -1;            // 현재 기준으로 잡힌 마디 번호
+    private float _currentBarAngle = 0f;     // 해당 마디에 쓸 방향 각도
+
     [Header("스폰 설정")]
     public float spawnRadius = 8f;    // 코어 기준 얼마나 멀리에서 스폰할지
     //public float spawnInterval = 1f;  // 노트 생성 간격(초)
@@ -88,6 +102,8 @@ public class NoteSpawner : MonoBehaviour
         BuildRuntimeNotes();
 
         // 6) 음악 재생 시작
+        _currentBar = -1;
+        _currentBarAngle = barStartAngle;
         audioSource.Play();
     }
 
@@ -135,12 +151,45 @@ public class NoteSpawner : MonoBehaviour
     {
         NoteJsonData n = runtimeNote.raw;
 
-        // 1) 각도 결정 (JSON에 음수가 들어오면 랜덤)
-        float angleDeg = n.angleDeg;
-        if (angleDeg < 0f)
+        float angleDeg;
+
+        // 1) JSON에 angleDeg가 -1 같은 음수면 "자동 시계방향"으로 돌려가며 사용
+        if (useAutoClockwiseAngle && useBarBasedDirection)
         {
-            angleDeg = Random.Range(0f, 360f);
+        int bar = n.bar;
+
+            // 처음 들어온 마디거나, 이전 노트와 다른 마디일 때
+            if (bar != _currentBar)
+            {
+                if (_currentBar == -1)
+                {
+                    // 첫 마디: 설정한 시작 각도 그대로 사용
+                    _currentBarAngle = barStartAngle;
+                }
+                else
+                {
+                    // 그 다음 마디부터는 barAngleStep 만큼 회전
+                    _currentBarAngle += barAngleStep;
+                    if (_currentBarAngle >= 360f) _currentBarAngle -= 360f;
+                    if (_currentBarAngle < 0f)    _currentBarAngle += 360f;
+                }
+
+                _currentBar = bar;
+            }
+
+            angleDeg = _currentBarAngle;
         }
+        else
+        {
+            // 2) JSON에 각도를 직접 지정한 경우 그대로 사용
+            angleDeg = n.angleDeg;
+
+            // 혹시 여기서도 음수인데, 그냥 랜덤 쓰고 싶으면 이 부분 유지
+            if (angleDeg < 0f)
+                angleDeg = Random.Range(0f, 360f);
+        }
+
+
 
         float rad = angleDeg * Mathf.Deg2Rad;
         Vector3 dir = new Vector3(Mathf.Cos(rad), 0f, Mathf.Sin(rad));
