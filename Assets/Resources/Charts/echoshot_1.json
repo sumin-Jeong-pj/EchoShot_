@@ -7,8 +7,14 @@
     "beatsPerBar": 4,
     "offsetSeconds": 0.0,
     "noteSpeed": 3.0,
-    "notes": [
+  "notes": [
+    {
+      "bar": 3,
+      "beat": 2.0,
+      "type": 0,
+      "angleDeg": 0.0,
+      "holdBeats": 0.0
+    }
 
-
-    ] 
+  ] 
 }
