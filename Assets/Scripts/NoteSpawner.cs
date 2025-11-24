@@ -46,20 +46,20 @@ public class NoteSpawner : MonoBehaviour
         public float spawnTime;  // 실제 스폰 시각(초)
     }
 
-    void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
+   void Awake()
+{
+    audioSource = GetComponent<AudioSource>();
 
-        // Core가 지정 안 되어 있으면 태그로 자동 찾기
-        if (core == null)
-        {
-            GameObject coreObj = GameObject.FindWithTag("Core");
-            if (coreObj != null)
-                core = coreObj.transform;
-            else
-                Debug.LogError("[ChartNoteSpawner] Core 태그를 가진 오브젝트를 찾을 수 없습니다.");
-        }
+    // Core가 지정 안 되어 있으면 태그로 자동 찾기
+    if (core == null)
+    {
+        GameObject coreObj = GameObject.FindWithTag("Core");
+        if (coreObj != null)
+            core = coreObj.transform;
+        else
+            Debug.LogError("[ChartNoteSpawner] Core 태그를 가진 오브젝트를 찾을 수 없습니다.");
     }
+}
 
     void Start()
     {

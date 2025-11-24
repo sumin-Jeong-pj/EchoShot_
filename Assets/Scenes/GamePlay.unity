@@ -766,7 +766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a018c9e6ee4add45a0ab693a78245b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chartFileName: echoshot_3
+  chartFileName: echoshot_2
   core: {fileID: 2108761345}
   judgeRing: {fileID: 1309790523}
   useAutoClockwiseAngle: 1
