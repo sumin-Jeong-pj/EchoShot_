@@ -10,6 +10,12 @@ public class CoreHealth : MonoBehaviour
 
     public Slider hpSlider;      
     public GameObject gameOverPanel;
+    public AudioSource bgmAudioSource;
+
+    public GameObject gameClearPanel;
+
+    private bool isMusicStarted = false;
+    private bool isGameEnded = false;
 
     void Awake()
     {
@@ -22,6 +28,21 @@ public class CoreHealth : MonoBehaviour
         }
 
         Debug.Log($"[CoreHealth] 초기화: {currentHearts}/{maxHearts}");
+    }
+
+    void Update()
+    {
+        if (isGameEnded || bgmAudioSource == null) return;
+
+        if (!isMusicStarted && bgmAudioSource.isPlaying)
+        {
+            isMusicStarted = true;
+        }
+
+        if (isMusicStarted && !bgmAudioSource.isPlaying)
+        {
+            OnGameClear();
+        }
     }
 
     public void TakeHit(int amount = 1)
@@ -42,11 +63,35 @@ public class CoreHealth : MonoBehaviour
 
     void OnDead()
     {
+        if (isGameEnded) return;
+        isGameEnded = true;
+
         Debug.Log("[CoreHealth] 체력 0! Game Over 처리 필요");
         if (gameOverPanel != null)
         {
             gameOverPanel.SetActive(true);
         }
+
+        if (bgmAudioSource != null)
+        {
+            bgmAudioSource.Stop();
+        }
+        Time.timeScale = 0f;
+    }
+
+    void OnGameClear()
+    {
+        if (isGameEnded) return;
+        isGameEnded = true;
+
+        Debug.Log("[CoreHealth] 노래 종료! Game Clear");
+
+        if (gameClearPanel != null)
+        {
+            gameClearPanel.SetActive(true);
+        }
+
+        Time.timeScale = 0f;
     }
 
     public void MoveToScene(string sceneName)
@@ -56,6 +101,7 @@ public class CoreHealth : MonoBehaviour
 
     public void RestartGame()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
