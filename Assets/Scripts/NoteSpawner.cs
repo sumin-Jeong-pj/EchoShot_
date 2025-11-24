@@ -103,6 +103,13 @@ public class NoteSpawner : MonoBehaviour
 
         // 6) 음악 재생 시작
         _currentBar = -1;
+
+        // 7) ScoreManager에 총 노트 수 전달
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.SetTotalNotes(chart.notes.Count);
+        }
+
         _currentBarAngle = barStartAngle;
         audioSource.Play();
     }

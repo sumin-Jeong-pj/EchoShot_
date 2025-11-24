@@ -89,6 +89,12 @@ public class JudgeSystem : MonoBehaviour
 
         Debug.Log($"[JudgeSystem] Judge: {result}, dist={bestDist:F3}, delta={delta:F3}");
 
+        //점수 기록
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.RegisterJudge(result);
+        }
+
         // 맞춘 노트 1개만 제거
         Destroy(bestNote.gameObject);
     }
@@ -108,6 +114,11 @@ public class JudgeSystem : MonoBehaviour
             {
                 Debug.Log($"[JudgeSystem] Miss! 노트가 코어에 도달 (dist={dist:F3})");
                 coreHealth.TakeHit(1);
+                //miss 기록
+                if (ScoreManager.Instance != null)
+                {
+                    ScoreManager.Instance.RegisterMiss();
+                }
                 Destroy(n.gameObject);
                 // 여러 개 한 번에 맞으면 그만큼 깎이는 게 자연스러우니 계속 진행
             }

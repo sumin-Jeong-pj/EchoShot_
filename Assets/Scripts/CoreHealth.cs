@@ -70,6 +70,7 @@ public class CoreHealth : MonoBehaviour
         if (gameOverPanel != null)
         {
             gameOverPanel.SetActive(true);
+            ScoreManager.Instance.DisplayScore();
         }
 
         if (bgmAudioSource != null)
@@ -89,6 +90,7 @@ public class CoreHealth : MonoBehaviour
         if (gameClearPanel != null)
         {
             gameClearPanel.SetActive(true);
+            ScoreManager.Instance.DisplayScore();
         }
 
         Time.timeScale = 0f;
