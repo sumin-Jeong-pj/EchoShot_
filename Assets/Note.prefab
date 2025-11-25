@@ -103,6 +103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f005d53f72f0e39409f4dcd4ae303975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitEffectPrefab: {fileID: 5724093481334579524, guid: eb24c3da2a84b7b4ca5d850dd712182b, type: 3}
+  hitSound: {fileID: 8300000, guid: 12cd1e989ea5e4649bb7b585d75bed20, type: 3}
 --- !u!114 &3203466557380635700
 MonoBehaviour:
   m_ObjectHideFlags: 0

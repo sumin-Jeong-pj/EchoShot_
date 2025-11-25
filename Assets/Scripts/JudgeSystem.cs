@@ -95,8 +95,9 @@ public class JudgeSystem : MonoBehaviour
             ScoreManager.Instance.RegisterJudge(result);
         }
 
-        // 맞춘 노트 1개만 제거
-        Destroy(bestNote.gameObject);
+        // 노트에게 '맞았다' 이벤트 전달 (이펙트 + 사운드 + 삭제)
+        bestNote.Hit();
+
     }
 
     void CheckMiss()

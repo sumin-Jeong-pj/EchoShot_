@@ -766,7 +766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a018c9e6ee4add45a0ab693a78245b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chartFileName: echoshot_2
+  chartFileName: echoshot_3
   core: {fileID: 2108761345}
   judgeRing: {fileID: 1309790523}
   useAutoClockwiseAngle: 1
@@ -71939,6 +71939,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7185616484023650137, guid: 9831832f3295bf646bc5a7ce3f16af8d, type: 3}
+      propertyPath: hitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 12cd1e989ea5e4649bb7b585d75bed20, type: 3}
+    - target: {fileID: 7185616484023650137, guid: 9831832f3295bf646bc5a7ce3f16af8d, type: 3}
+      propertyPath: hitEffectPrefab
+      value: 
+      objectReference: {fileID: 5724093481334579524, guid: eb24c3da2a84b7b4ca5d850dd712182b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
