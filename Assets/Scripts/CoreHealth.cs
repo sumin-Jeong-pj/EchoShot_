@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class CoreHealth : MonoBehaviour
 {
-    [Header("ÇÏÆ® Ã¼·Â ¼³Á¤")]
+    [Header("í•˜íŠ¸ ì²´ë ¥ ì„¤ì •")]
     public int maxHearts = 5;
     public int currentHearts;
 
@@ -27,7 +27,7 @@ public class CoreHealth : MonoBehaviour
             hpSlider.value = currentHearts;
         }
 
-        Debug.Log($"[CoreHealth] ÃÊ±âÈ­: {currentHearts}/{maxHearts}");
+        Debug.Log($"[CoreHealth] ì´ˆê¸°í™”: {currentHearts}/{maxHearts}");
     }
 
     void Update()
@@ -48,7 +48,7 @@ public class CoreHealth : MonoBehaviour
     public void TakeHit(int amount = 1)
     {
         currentHearts = Mathf.Max(0, currentHearts - amount);
-        Debug.Log($"[CoreHealth] ÇÇ°Ý! ÇöÀç ÇÏÆ®: {currentHearts}/{maxHearts}");
+        Debug.Log($"[CoreHealth] í”¼ê²©! í˜„ìž¬ í•˜íŠ¸: {currentHearts}/{maxHearts}");
 
         if (hpSlider != null)
         {
@@ -66,11 +66,12 @@ public class CoreHealth : MonoBehaviour
         if (isGameEnded) return;
         isGameEnded = true;
 
-        Debug.Log("[CoreHealth] Ã¼·Â 0! Game Over Ã³¸® ÇÊ¿ä");
+        Debug.Log("[CoreHealth] ì²´ë ¥ 0! Game Over ì²˜ë¦¬ í•„ìš”");
         if (gameOverPanel != null)
         {
-            gameOverPanel.SetActive(true);
             ScoreManager.Instance.DisplayScore();
+            gameOverPanel.SetActive(true);
+            
         }
 
         if (bgmAudioSource != null)
@@ -85,12 +86,13 @@ public class CoreHealth : MonoBehaviour
         if (isGameEnded) return;
         isGameEnded = true;
 
-        Debug.Log("[CoreHealth] ³ë·¡ Á¾·á! Game Clear");
+        Debug.Log("[CoreHealth] ë…¸ëž˜ ì¢…ë£Œ! Game Clear");
 
         if (gameClearPanel != null)
         {
-            gameClearPanel.SetActive(true);
             ScoreManager.Instance.DisplayScore();
+            gameClearPanel.SetActive(true);
+            
         }
 
         Time.timeScale = 0f;

@@ -92,7 +92,9 @@ public class ScoreManager : MonoBehaviour
         float scorePercent = GetScorePercent();
         gameClearScoreText.text = $"Score: {scorePercent:F2}%";
         gameOverScoreText.text = $"Score: {scorePercent:F2}%";
-        
+        ResetScore();
+
+
     }   
 
     // 점수/카운트 리셋
