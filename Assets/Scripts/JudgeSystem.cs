@@ -24,6 +24,11 @@ public class JudgeSystem : MonoBehaviour
     [Header("미스 처리")]
     public float missRadius = 0.5f;       // 코어에서 이 거리 이내로 들어오면 Miss
 
+    [Header("피격 사운드")]
+    public AudioSource hitAudioSource;   // (BGM이든 SFX든) 재생할 오디오소스
+    public AudioClip hitClip;            // 맞을 때 재생할 클립
+
+
     void Update()
     {
         // 1) 키 입력 판정
@@ -115,6 +120,12 @@ public class JudgeSystem : MonoBehaviour
             {
                 Debug.Log($"[JudgeSystem] Miss! 노트가 코어에 도달 (dist={dist:F3})");
                 coreHealth.TakeHit(1);
+                if (hitAudioSource != null)
+                {
+                    if (hitClip != null) hitAudioSource.PlayOneShot(hitClip);
+                    else hitAudioSource.Play(); // clip이 AudioSource에 이미 지정돼 있으면 이걸로도 OK
+                }
+
                 //miss 기록
                 if (ScoreManager.Instance != null)
                 {
